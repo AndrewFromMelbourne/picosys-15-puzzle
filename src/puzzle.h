@@ -59,7 +59,7 @@ private:
     static constexpr int boardSize = puzzleWidth * puzzleHeight;
 
     std::array<uint8_t, boardSize> m_board;
+    std::array<picosystem::buffer_t, 16> m_tileBuffers;
     Location m_blankLocation;
-
 };
 

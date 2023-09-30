@@ -38,4 +38,20 @@ static constexpr int tileLength = tileWidth * tileHeight;
 
 //-------------------------------------------------------------------------
 
-extern picosystem::color_t pieces[tileCount][tileLength] ;
+extern picosystem::color_t piece0[tileLength] ;
+extern picosystem::color_t piece1[tileLength] ;
+extern picosystem::color_t piece2[tileLength] ;
+extern picosystem::color_t piece3[tileLength] ;
+extern picosystem::color_t piece4[tileLength] ;
+extern picosystem::color_t piece5[tileLength] ;
+extern picosystem::color_t piece6[tileLength] ;
+extern picosystem::color_t piece7[tileLength] ;
+extern picosystem::color_t piece8[tileLength] ;
+extern picosystem::color_t piece9[tileLength] ;
+extern picosystem::color_t piece10[tileLength] ;
+extern picosystem::color_t piece10[tileLength] ;
+extern picosystem::color_t piece11[tileLength] ;
+extern picosystem::color_t piece12[tileLength] ;
+extern picosystem::color_t piece13[tileLength] ;
+extern picosystem::color_t piece14[tileLength] ;
+extern picosystem::color_t piece15[tileLength] ;

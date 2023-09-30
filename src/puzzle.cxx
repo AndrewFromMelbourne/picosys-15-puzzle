@@ -47,6 +47,25 @@ Puzzle::Puzzle()
         0x09, 0x0A, 0x0B, 0x0C,
         0x0D, 0x0E, 0x0F, 0x00
     },
+    m_tileBuffers(
+        { {
+            { tileWidth, tileHeight, piece0 },
+            { tileWidth, tileHeight, piece1 },
+            { tileWidth, tileHeight, piece2 },
+            { tileWidth, tileHeight, piece3 },
+            { tileWidth, tileHeight, piece4 },
+            { tileWidth, tileHeight, piece5 },
+            { tileWidth, tileHeight, piece6 },
+            { tileWidth, tileHeight, piece7 },
+            { tileWidth, tileHeight, piece8 },
+            { tileWidth, tileHeight, piece9 },
+            { tileWidth, tileHeight, piece10 },
+            { tileWidth, tileHeight, piece11 },
+            { tileWidth, tileHeight, piece12 },
+            { tileWidth, tileHeight, piece13 },
+            { tileWidth, tileHeight, piece14 },
+            { tileWidth, tileHeight, piece15 },
+        } }),
     m_blankLocation{ 3, 3 }
 {
 }
@@ -199,13 +218,13 @@ Puzzle::draw(uint32_t tick)
         for (int i = 0 ; i < puzzleWidth ; ++i)
         {
            int tile = m_board[i + (j * puzzleWidth)];
-
-           buffer_t buffer;
-           buffer.w = tileWidth;
-           buffer.h = tileHeight;
-           buffer.data = &(pieces[tile][0]);
-
-           blit(&buffer, 0, 0, tileWidth, tileHeight, i * tileWidth, j * tileHeight);
+           blit(&(m_tileBuffers[tile]),
+                0,
+                0,
+                tileWidth,
+                tileHeight,
+                i * tileWidth,
+                j * tileHeight);
         }
     }
 }
