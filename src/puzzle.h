@@ -30,6 +30,8 @@
 #include <array>
 #include <cstdint>
 
+#include "images.h"
+
 //-------------------------------------------------------------------------
 
 class Puzzle
@@ -59,7 +61,7 @@ private:
     static constexpr int boardSize = puzzleWidth * puzzleHeight;
 
     std::array<uint8_t, boardSize> m_board;
-    std::array<picosystem::buffer_t, 16> m_tileBuffers;
+    std::array<picosystem::buffer_t, tileCount> m_tileBuffers;
     Location m_blankLocation;
 };
 
