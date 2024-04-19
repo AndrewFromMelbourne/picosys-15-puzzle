@@ -28,6 +28,7 @@
 #include <algorithm>
 
 #include "picosystem.hpp"
+#include "pico/rand.h"
 
 #include "images.h"
 #include "puzzle.h"
@@ -49,22 +50,22 @@ Puzzle::Puzzle()
     },
     m_tileBuffers(
         { {
-            { tileWidth, tileHeight, piece0 },
-            { tileWidth, tileHeight, piece1 },
-            { tileWidth, tileHeight, piece2 },
-            { tileWidth, tileHeight, piece3 },
-            { tileWidth, tileHeight, piece4 },
-            { tileWidth, tileHeight, piece5 },
-            { tileWidth, tileHeight, piece6 },
-            { tileWidth, tileHeight, piece7 },
-            { tileWidth, tileHeight, piece8 },
-            { tileWidth, tileHeight, piece9 },
-            { tileWidth, tileHeight, piece10 },
-            { tileWidth, tileHeight, piece11 },
-            { tileWidth, tileHeight, piece12 },
-            { tileWidth, tileHeight, piece13 },
-            { tileWidth, tileHeight, piece14 },
-            { tileWidth, tileHeight, piece15 },
+            { tileWidth, tileHeight, piece0, false },
+            { tileWidth, tileHeight, piece1, false },
+            { tileWidth, tileHeight, piece2, false },
+            { tileWidth, tileHeight, piece3, false },
+            { tileWidth, tileHeight, piece4, false },
+            { tileWidth, tileHeight, piece5, false },
+            { tileWidth, tileHeight, piece6, false },
+            { tileWidth, tileHeight, piece7, false },
+            { tileWidth, tileHeight, piece8, false },
+            { tileWidth, tileHeight, piece9, false },
+            { tileWidth, tileHeight, piece10, false },
+            { tileWidth, tileHeight, piece11, false },
+            { tileWidth, tileHeight, piece12, false },
+            { tileWidth, tileHeight, piece13, false },
+            { tileWidth, tileHeight, piece14, false },
+            { tileWidth, tileHeight, piece15, false },
         } }),
     m_blankLocation{ 3, 3 }
 {
@@ -134,7 +135,7 @@ Puzzle::init()
     {
         for (int i = 0; i < boardSize - 1; ++i) 
         {
-            auto j = i + rand() / (RAND_MAX / (boardSize - i) + 1);
+            auto j = i + get_rand_32() / (UINT32_MAX / (boardSize - i) + 1);
             std::swap(m_board[i], m_board[j]);
         }
 
@@ -148,7 +149,7 @@ Puzzle::init()
             }
         }
     }
-    while (not isSolvable() && not isSolved());
+    while (not isSolvable() or isSolved());
 }
 
 //-------------------------------------------------------------------------

@@ -44,3 +44,5 @@ disable_startup_logo(${PROJECT_NAME}) # Skip the PicoSystem splash
 no_font(${PROJECT_NAME})              # Omit the default font
 no_spritesheet(${PROJECT_NAME})       # Omit the default spritesheet
 no_overclock(${PROJECT_NAME})         # Don't overclock
+
+target_link_libraries(${PROJECT_NAME} pico_rand)
