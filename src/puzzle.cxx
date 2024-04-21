@@ -41,7 +41,7 @@ using namespace picosystem;
 
 Puzzle::Puzzle()
 :
-    m_board 
+    m_board
     {
         0x01, 0x02, 0x03, 0x04,
         0x05, 0x06, 0x07, 0x08,
@@ -115,7 +115,7 @@ Puzzle::isSolved() const
 {
     bool solved = true;
 
-    for (int i = 0; i < boardSize - 1 ; ++i)
+    for (int i = 0 ; i < boardSize - 1 ; ++i)
     {
         if (m_board[i] != (i + 1))
         {
@@ -133,13 +133,13 @@ Puzzle::init()
 {
     do
     {
-        for (int i = 0; i < boardSize - 1; ++i) 
+        for (int i = 0 ; i < boardSize - 1 ; ++i)
         {
             auto j = i + get_rand_32() / (UINT32_MAX / (boardSize - i) + 1);
             std::swap(m_board[i], m_board[j]);
         }
 
-        for (int i = 0; i < boardSize - 1; ++i) 
+        for (int i = 0 ; i < boardSize ; ++i)
         {
             if (m_board[i] == 0)
             {
@@ -183,19 +183,22 @@ Puzzle::update(uint32_t tick)
             dx = -1;
         }
 
-        Location newLocation = {.x = m_blankLocation.x + dx, .y = m_blankLocation.y + dy};
-
-        if ((newLocation.x >= 0) &&
-            (newLocation.x < puzzleWidth) &&
-            (newLocation.y >= 0) &&
-            (newLocation.y < puzzleHeight))
+        if ((dx != 0) or (dy != 0))
         {
-            const auto indexNew = newLocation.x + (newLocation.y * puzzleWidth);
-            const auto indexBlank = m_blankLocation.x + (m_blankLocation.y * puzzleWidth);
-            std::swap(m_board[indexNew], m_board[indexBlank]);
+            const Location newLocation = {.x = m_blankLocation.x + dx,
+                                          .y = m_blankLocation.y + dy};
 
-            m_blankLocation.x = newLocation.x;
-            m_blankLocation.y = newLocation.y;
+            if ((newLocation.x >= 0) &&
+                (newLocation.x < puzzleWidth) &&
+                (newLocation.y >= 0) &&
+                (newLocation.y < puzzleHeight))
+            {
+                const auto indexNew = newLocation.x + (newLocation.y * puzzleWidth);
+                const auto indexBlank = m_blankLocation.x + (m_blankLocation.y * puzzleWidth);
+                std::swap(m_board[indexNew], m_board[indexBlank]);
+
+                m_blankLocation = newLocation;
+            }
         }
     }
 
@@ -218,7 +221,7 @@ Puzzle::draw(uint32_t tick)
     {
         for (int i = 0 ; i < puzzleWidth ; ++i)
         {
-           int tile = m_board[i + (j * puzzleWidth)];
+           const auto tile = m_board[i + (j * puzzleWidth)];
            blit(&(m_tileBuffers[tile]),
                 0,
                 0,
@@ -229,4 +232,3 @@ Puzzle::draw(uint32_t tick)
         }
     }
 }
-
